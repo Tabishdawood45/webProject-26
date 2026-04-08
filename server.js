@@ -11,6 +11,11 @@ app.use(express.json());
 app.use(express.static('public'));
 
 const authRoutes = require('./routes/authRoutes');
+const feedbackRoutes = require('./routes/feedbackRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/feedback', feedbackRoutes);
 app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {

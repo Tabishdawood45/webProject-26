@@ -79,13 +79,20 @@ CREATE TABLE cart_items (
 
 CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
-  user_id INT REFERENCES users(id) ON DELETE CASCADE,
-  product_id INT REFERENCES products(id) ON DELETE CASCADE,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
   comment TEXT NOT NULL,
-  rating INT CHECK (rating >= 1 AND rating <= 5),
-  likes_count INT DEFAULT 0,
+  rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+  likes_count INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS review_likes (
+  id SERIAL PRIMARY KEY,
+  review_id INTEGER NOT NULL REFERENCES reviews(id) ON DELETE CASCADE,
+  user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  UNIQUE(review_id, user_id)
 );
 
 CREATE TABLE orders (

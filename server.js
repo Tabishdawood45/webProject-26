@@ -12,13 +12,13 @@ app.use(express.static('public'));
 const authRoutes = require('./routes/authRoutes');
 const feedbackRoutes = require('./routes/feedbackRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
-const productRoutes = require('./routes/productRoutes');   // <-- Added
+const productRoutes = require('./routes/productRoutes');
 
 // Use routes
-app.use('/api/reviews', reviewRoutes);
-app.use('/api/feedback', feedbackRoutes);
 app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);                   // <-- Added
+app.use('/api/feedback', feedbackRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/products', productRoutes);
 
 app.get('/', (req, res) => {
   res.send('Sportscart backend is running');

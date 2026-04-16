@@ -5,148 +5,142 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sportscart | Home</title>
 
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Your CSS -->
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-    <div class="container">
-      <a class="navbar-brand fw-bold text-primary" href="/index.html">Sportscart</a>
+  <header>
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="index.html">Sportscart</a>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-          <li class="nav-item"><a class="nav-link" href="/products.html">Products</a></li>
-          <li class="nav-item"><a class="nav-link" href="/about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="/contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="/cart.html" data-auth>Cart</a></li>
-          <li class="nav-item"><a class="nav-link" href="/dashboard.html" data-auth>Dashboard</a></li>
-          <li class="nav-item"><span class="nav-link" id="navWelcome"></span></li>
-          <li class="nav-item"><a class="btn btn-outline-primary btn-sm" href="/login.html" data-guest>Login</a></li>
-          <li class="nav-item"><a class="btn btn-primary btn-sm" href="/signup.html" data-guest>Sign up</a></li>
-          <li class="nav-item"><button class="btn btn-danger btn-sm" data-auth data-logout>Logout</button></li>
-        </ul>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+            <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="cart.html" data-auth>Cart</a></li>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html" data-auth>Dashboard</a></li>
+            <li class="nav-item"><span class="nav-link fw-semibold text-primary" id="navWelcome"></span></li>
+            <li class="nav-item"><a class="btn btn-outline-primary btn-sm" href="login.html" data-guest>Login</a></li>
+            <li class="nav-item"><a class="btn btn-primary btn-sm" href="signup.html" data-guest>Sign up</a></li>
+            <li class="nav-item"><button class="btn btn-danger btn-sm" data-auth data-logout>Logout</button></li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero-section text-white py-5">
+  <section class="hero-section">
     <div class="container">
-      <div class="row align-items-center g-4">
+      <div class="row align-items-center g-5">
         <div class="col-lg-7">
-          <h1 class="display-5 fw-bold">Sportscart for sports products selling</h1>
-          <p class="lead">
-            A web programming project built with HTML, CSS, JavaScript, Node.js, Express and PostgreSQL.
-            It includes products, search, login, reviews, likes, cart, orders and feedback.
+          <span class="hero-label">Sports shopping made simple</span>
+          <h1>Buy quality sports products online with Sportscart</h1>
+          <p>
+            Sportscart is a sports products selling website made with HTML, CSS, JavaScript,
+            Node.js, Express and PostgreSQL. It includes products, login, reviews, likes,
+            cart, orders and feedback features.
           </p>
 
-          <div class="d-flex flex-wrap gap-2 mt-3">
-            <a class="btn btn-light btn-lg" href="/products.html">Shop now</a>
-            <a class="btn btn-outline-light btn-lg" href="/about.html">Project info</a>
+          <div class="hero-buttons">
+            <a class="btn btn-light btn-lg" href="products.html">Shop now</a>
+            <a class="btn btn-outline-light btn-lg" href="about.html">Project info</a>
           </div>
 
-          <div class="mt-4 d-flex flex-wrap gap-2">
-            <span class="badge rounded-pill bg-light text-dark p-2">Register & Login</span>
-            <span class="badge rounded-pill bg-light text-dark p-2">Search Products</span>
-            <span class="badge rounded-pill bg-light text-dark p-2">Reviews & Likes</span>
-            <span class="badge rounded-pill bg-light text-dark p-2">PostgreSQL</span>
+          <div class="hero-badges">
+            <span class="hero-pill">Register & Login</span>
+            <span class="hero-pill">Search Products</span>
+            <span class="hero-pill">Reviews & Likes</span>
+            <span class="hero-pill">PostgreSQL</span>
           </div>
         </div>
 
         <div class="col-lg-5">
-          <div class="card shadow border-0">
-            <div class="card-body p-4">
-              <h3 class="h5 fw-bold mb-3">Suggested demo flow</h3>
-              <ol class="mb-0">
-                <li>Open homepage</li>
-                <li>Show products and search</li>
-                <li>Login with demo account</li>
-                <li>Add item to cart</li>
-                <li>Place order</li>
-                <li>Show review and feedback system</li>
-              </ol>
-            </div>
+          <div class="hero-info-card">
+            <h3>Suggested demo flow</h3>
+            <ol>
+              <li>Open homepage</li>
+              <li>Browse products</li>
+              <li>Login or sign up</li>
+              <li>Open product details</li>
+              <li>Add review and like reviews</li>
+              <li>Add item to cart</li>
+            </ol>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FEATURED PRODUCTS -->
-  <section class="py-5 bg-light">
+  <section class="section bg-white">
     <div class="container">
-      <h2 class="fw-bold mb-2">Featured sports products</h2>
-      <p class="text-muted mb-4">
-        These products are loaded from PostgreSQL using backend API.
-      </p>
+      <div class="section-header">
+        <h2 class="section-title">Featured sports products</h2>
+        <p class="section-subtitle">
+          These products are loaded from PostgreSQL using backend API.
+        </p>
+      </div>
 
-      <!-- IMPORTANT FIX: Bootstrap row -->
       <div class="row g-4" id="featuredProducts"></div>
     </div>
   </section>
 
-  <!-- INFO CARDS -->
-  <section class="py-5">
+  <section class="section">
     <div class="container">
       <div class="row g-4">
-
         <div class="col-md-4">
-          <div class="card h-100 shadow-sm border-0">
+          <div class="card info-card h-100 border-0 shadow-sm">
             <div class="card-body">
-              <h3 class="h5 fw-bold">Why this topic fits the course</h3>
+              <h3 class="h5 fw-bold">Quality with Quantity</h3>
               <p class="mb-0">
-                This project shows CRUD, authentication, database design, client-server communication and deployment.
+                We have lots of product browse and get the product with in 4 week
+                days.
               </p>
             </div>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm border-0">
+        <!-- <div class="col-md-4">
+          <div class="card info-card h-100 border-0 shadow-sm">
             <div class="card-body">
               <h3 class="h5 fw-bold">Frontend</h3>
               <p class="mb-0">
-                HTML, CSS and JavaScript pages call backend APIs and update the page dynamically.
+                HTML, CSS and JavaScript pages call backend APIs and update
+                the page dynamically.
               </p>
             </div>
           </div>
-        </div>
+        </div> -->
 
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm border-0">
+        <!-- <div class="col-md-4">
+          <div class="card info-card h-100 border-0 shadow-sm">
             <div class="card-body">
               <h3 class="h5 fw-bold">Backend</h3>
               <p class="mb-0">
-                Express routes handle auth, products, reviews, cart, orders and feedback using PostgreSQL.
+                Express routes handle auth, products, reviews, cart,
+                orders and feedback using PostgreSQL.
               </p>
-            </div>
+            </div> -->
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer class="bg-dark text-white py-4">
+  <footer>
     <div class="container text-center">
       Sportscart project • Web Programming course • Scrum team
     </div>
   </footer>
 
-  <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/js/app.js"></script>
   <script src="/js/home.js"></script>
-
 </body>
 </html>

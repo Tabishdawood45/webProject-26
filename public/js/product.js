@@ -45,22 +45,22 @@ async function loadProductDetails() {
     }
 
     productView.innerHTML = `
-      <div>
-        <img 
-          src="${product.image_url || '/images/placeholder.jpg'}" 
-          alt="${product.name}" 
-          class="product-detail-image"
-        >
-      </div>
+      <div class="row g-4 align-items-start">
+        <div class="col-md-5">
+          <img 
+            src="${product.image_url || '/images/placeholder.jpg'}" 
+            alt="${product.name}" 
+            class="img-fluid rounded shadow-sm w-100"
+          >
+        </div>
 
-      <div class="product-detail-info">
-        <h1 class="product-detail-title">${product.name}</h1>
-        <p class="product-meta"><strong>Category:</strong> ${product.category}</p>
-        <p class="product-detail-description">${product.description || 'No description available.'}</p>
-        <h2 class="product-detail-price">€${product.price}</h2>
-        <p class="small">Stock available: ${product.stock}</p>
+        <div class="col-md-7">
+          <h1 class="fw-bold mb-3">${product.name}</h1>
+          <p class="mb-2"><strong>Category:</strong> ${product.category}</p>
+          <p class="mb-3">${product.description || 'No description available.'}</p>
+          <h2 class="text-primary mb-3">€${product.price}</h2>
+          <p class="small text-muted">Stock available: ${product.stock}</p>
 
-        <div class="row" style="margin-top: 18px;">
           <button class="btn btn-primary" id="addToCartBtn">Add to cart</button>
         </div>
       </div>
@@ -70,7 +70,6 @@ async function loadProductDetails() {
     if (addToCartBtn) {
       addToCartBtn.addEventListener('click', () => addToCart(product));
     }
-
   } catch (error) {
     console.error(error);
     productView.innerHTML = '<p>Could not load product details.</p>';

@@ -163,3 +163,6 @@ async function loadAllProducts() {
 }
 
 loadAllProducts();
+
+
+

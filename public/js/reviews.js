@@ -14,6 +14,12 @@ function getLoggedInUser() {
   return JSON.parse(localStorage.getItem('user'));
 }
 
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text ?? '';
+  return div.innerHTML;
+}
+
 const productId = getProductIdFromUrl();
 
 function showAlert(message, type = 'success') {
@@ -35,31 +41,44 @@ async function loadReviews() {
 
     reviewsList.innerHTML = reviews.map(review => {
       const isOwner = user && Number(user.id) === Number(review.user_id);
+      const isAdmin = user && user.role === 'admin';
 
       return `
-        <div class="card shadow-sm border-0 mb-4 review-card">
-          <div class="card-body p-4">
-            <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+        <div class="card review-card" style="margin-bottom: 18px;">
+          <div class="card-body">
+            <div class="space-between" style="margin-bottom: 12px;">
               <div>
-                <h5 class="mb-1 fw-bold">${review.full_name}</h5>
+                <h4 style="margin: 0 0 8px;">${escapeHtml(review.full_name)}</h4>
                 <div class="review-rating-badge">Rating: ${review.rating}/5</div>
               </div>
-              <small class="text-muted">${new Date(review.created_at).toLocaleDateString()}</small>
+              <small class="small">${new Date(review.created_at).toLocaleDateString()}</small>
             </div>
 
-            <p class="review-comment mb-3">${review.comment}</p>
+            <p class="review-comment">${escapeHtml(review.comment)}</p>
 
-            <div class="review-actions d-flex gap-2 flex-wrap">
-              <button class="btn btn-outline-primary btn-sm review-like-btn" onclick="likeReview(${review.id}, this)">
-                👍 Like <span class="badge bg-primary ms-1">${review.likes_count}</span>
+            <div class="review-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-outline-primary btn-sm" onclick="likeReview(${review.id}, this)">
+                👍 Like <span style="margin-left: 4px;">${review.likes_count}</span>
               </button>
 
               ${isOwner ? `
-                <button 
-                  class="btn btn-outline-secondary btn-sm"
-                  onclick="editReview(${review.id}, ${review.rating}, ${JSON.stringify(review.comment)})"
+                <button
+                  class="btn btn-secondary btn-sm"
+                  onclick="editReviewFromButton(this)"
+                  data-review-id="${review.id}"
+                  data-review-rating="${review.rating}"
+                  data-review-comment="${encodeURIComponent(review.comment)}"
                 >
                   ✏ Edit comment
+                </button>
+              ` : ''}
+
+              ${isAdmin ? `
+                <button
+                  class="btn btn-danger btn-sm"
+                  onclick="deleteReview(${review.id})"
+                >
+                  Delete Review
                 </button>
               ` : ''}
             </div>
@@ -73,15 +92,27 @@ async function loadReviews() {
   }
 }
 
-function editReview(id, rating, comment) {
+function editReviewFromButton(button) {
+  const id = button.dataset.reviewId;
+  const rating = button.dataset.reviewRating;
+  const comment = decodeURIComponent(button.dataset.reviewComment || '');
+
   reviewIdInput.value = id;
   ratingInput.value = rating;
   commentInput.value = comment;
-
   ratingInput.disabled = true;
 
-  showAlert('You can edit only your comment. Rating cannot be changed after publishing.', 'info');
-  window.scrollTo({ top: reviewForm.offsetTop - 100, behavior: 'smooth' });
+  showAlert(
+    'You can edit only your comment. Rating cannot be changed after publishing.',
+    'info'
+  );
+
+  if (reviewForm) {
+    window.scrollTo({
+      top: reviewForm.offsetTop - 100,
+      behavior: 'smooth'
+    });
+  }
 }
 
 reviewForm?.addEventListener('submit', async (e) => {
@@ -176,5 +207,42 @@ async function likeReview(id, button) {
     button.disabled = false;
   }
 }
+
+async function deleteReview(reviewId) {
+  const user = getLoggedInUser();
+
+  if (!user || user.role !== 'admin') {
+    alert('Only admin can delete reviews');
+    return;
+  }
+
+  const confirmDelete = confirm('Are you sure you want to delete this review?');
+  if (!confirmDelete) return;
+
+  try {
+    const res = await fetch(`/api/reviews/${reviewId}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ user_role: user.role })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.message || 'Failed to delete review');
+      return;
+    }
+
+    alert('Review deleted successfully');
+    loadReviews();
+  } catch (error) {
+    console.error(error);
+    alert('Error deleting review');
+  }
+}
+
+window.likeReview = likeReview;
+window.editReviewFromButton = editReviewFromButton;
+window.deleteReview = deleteReview;
 
 loadReviews();

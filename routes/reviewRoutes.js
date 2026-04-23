@@ -70,7 +70,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Edit only review comment
+// Edit own review comment
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
@@ -150,6 +150,34 @@ router.put('/like/:id', async (req, res) => {
       message: 'Review liked successfully',
       review: updatedReview.rows[0]
     });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Admin delete review
+router.delete('/:id', async (req, res) => {
+  try {
+    const { user_role } = req.body;
+    const reviewId = req.params.id;
+
+    if (user_role !== 'admin') {
+      return res.status(403).json({ message: 'Only admin can delete reviews' });
+    }
+
+    const existingReview = await pool.query(
+      'SELECT * FROM reviews WHERE id = $1',
+      [reviewId]
+    );
+
+    if (existingReview.rows.length === 0) {
+      return res.status(404).json({ message: 'Review not found' });
+    }
+
+    await pool.query('DELETE FROM reviews WHERE id = $1', [reviewId]);
+
+    res.json({ message: 'Review deleted successfully' });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: 'Server error' });

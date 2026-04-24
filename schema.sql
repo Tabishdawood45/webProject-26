@@ -84,12 +84,31 @@ CREATE TABLE order_items (
   price_at_purchase NUMERIC(10,2) NOT NULL
 );
 
-
-INSERT INTO products (name, category, price, stock, image_url, description, created_at)
+INSERT INTO products (name, category, price, stock, image_url, description)
 VALUES
-('Cricket Bat', 'Cricket', 120.00, 15, 'images/cricket bat.jpg', 'High quality cricket bat', NOW()),
-('Cricket Ball', 'Cricket', 15.00, 50, 'images/cricket-ball-isolated.jpg', 'Durable leather cricket ball', NOW()),
-('Football', 'Football', 30.00, 40, 'images/football.jpg', 'Standard size football', NOW()),
-('Hockey Bat', 'Hockey', 80.00, 20, 'images/hockey-bat.jpg', 'Professional hockey stick', NOW()),
-('Table Tennis Bat', 'Table Tennis', 25.00, 35, 'images/table-tennis-bat.jpg', 'Lightweight TT bat', NOW()),
-('Tennis Ball', 'Tennis', 10.00, 60, 'images/tennis-ball.jpg', 'Pack of tennis balls', NOW());
+('Hiking Kit', 'Outdoor', 60.00, 8, '/images/Hiking kit.jpg', 'Complete hiking kit with essential gear'),
+('Towel', 'Accessories', 10.00, 25, '/images/Towel.jpg', 'Soft and absorbent sports towel'),
+('Bicycle Helmet', 'Outdoor', 30.00, 20, '/images/Bicycle helmet.jpg', 'Safety bicycle helmet for outdoor riding'),
+('Cricket Ball', 'Sports Equipment', 8.00, 30, '/images/cricket-ball-isolated.jpg', 'Durable leather cricket ball'),
+('Tennis Ball', 'Sports Equipment', 5.00, 40, '/images/tennis-ball.jpg', 'Soft and durable tennis ball'),
+('Football', 'Sports Equipment', 15.00, 20, '/images/football.jpg', 'Standard size football for outdoor play'),
+('Cricket Bat', 'Sports Equipment', 40.00, 10, '/images/cricket bat.jpg', 'High‑quality wooden cricket bat'),
+('Table Tennis Bat', 'Sports Equipment', 12.00, 15, '/images/table-tennis-bat.jpg', 'Lightweight table tennis bat'),
+('Hockey Bat', 'Sports Equipment', 35.00, 12, '/images/hockey-bat.jpg', 'Strong and durable hockey bat'),
+('Sports Shirt', 'Clothing', 20.00, 10, '/images/Sports Shirt.jpg', 'High‑quality sports shirt for training'),
+('Running Shoes', 'Footwear', 45.00, 15, '/images/Running Shoes.jpg', 'Comfortable running shoes for daily workouts'),
+('Football Shoes', 'Footwear', 50.00, 12, '/images/Football Shoes.jpg', 'Durable football shoes with strong grip');
+
+
+
+
+
+
+
+
+
+
+
+
+
+

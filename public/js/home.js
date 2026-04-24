@@ -16,18 +16,21 @@ async function loadFeaturedProducts() {
     container.innerHTML = featured.map(product => `
       <div class="col-md-6 col-lg-4">
         <article class="card product-card h-100 border-0 shadow-sm">
-          <img
-            src="${product.image_url || '/images/placeholder.jpg'}"
-            alt="${product.name}"
-            class="product-image"
-          >
+          <div class="product-image-wrap">
+            <img
+              src="${product.image_url || '/images/placeholder.jpg'}"
+              alt="${product.name}"
+              class="product-image"
+              onerror="this.src='/images/placeholder.jpg'"
+            >
+          </div>
           <div class="card-body d-flex flex-column">
             <h3 class="product-title">${product.name}</h3>
             <p class="product-meta">${product.category || 'Sports'}</p>
-            <p class="flex-grow-1">${product.description || 'Sports product for your needs.'}</p>
+            <p class="product-description flex-grow-1">${product.description || 'Sports product for your needs.'}</p>
             <div class="product-actions mt-3">
               <strong class="text-primary fs-5">€${product.price}</strong>
-              <a href="/product.html?id=${product.id}" class="btn btn-primary btn-sm">View details</a>
+              <a href="./product.html?id=${product.id}" class="btn btn-primary btn-sm">View details</a>
             </div>
           </div>
         </article>

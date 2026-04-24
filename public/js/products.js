@@ -12,19 +12,22 @@ window.renderProducts = function(products) {
 
   container.innerHTML = products.map(product => `
     <article class="card product-card">
-      <img
-        src="${product.image_url || '/images/placeholder.jpg'}"
-        alt="${product.name}"
-        class="product-image"
-      >
+      <div class="product-image-wrap">
+        <img
+          src="${product.image_url || '/images/placeholder.jpg'}"
+          alt="${product.name}"
+          class="product-image"
+          onerror="this.src='/images/placeholder.jpg'"
+        >
+      </div>
       <div class="card-body">
         <h3 class="product-title">${product.name}</h3>
         <p class="product-meta">${product.category || 'Sports item'}</p>
-        <p>${product.description || 'No description available.'}</p>
+        <p class="product-description">${product.description || 'No description available.'}</p>
 
         <div class="product-actions">
           <strong class="text-primary fs-5">€${product.price}</strong>
-          <a href="/product.html?id=${product.id}" class="btn btn-primary">View details</a>
+          <a href="./product.html?id=${product.id}" class="btn btn-primary btn-sm">View details</a>
         </div>
       </div>
     </article>
@@ -58,3 +61,6 @@ async function loadAllProducts() {
 }
 
 loadAllProducts();
+
+
+
